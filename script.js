@@ -1,9 +1,10 @@
 
 $(document).ready(function () {
     var city = [ "New York", "San Francisco", "Portland", "Boston", "Atlanta"];
+
     var lat;
     var lon;
-    var APIkey = "20ec89cc9724774592de5023f22ec39";
+    var APIkey = "d20ec89cc9724774592de5023f22ec39";
 
     //set up for date
     var now = moment().format('LL');
@@ -22,6 +23,28 @@ $(document).ready(function () {
 ;
 
 
+for (i=0;i<city.length;i++){
+    $("#citySearch").append("<button class='citySearchButton' value='"+city[i]+"'>"+city[i]+"</button>")
+}
+if(localStorage.getItem("cities"))
+{
+city.push(JSON.parse(localStorage.getItem("cities")))
+}
+
+$("#searchBtn").on("click",function(){
+    var input=$("#searchBar").val()
+    city.push(input);
+    $("#citySearch").append("<button class='citySearchButton' value='"+input+"'>"+input+"</button>")
+    forecasts(input);
+    localStorage.setItem("cities",JSON.stringify(city))
+})
+
+$(document).on("click",".citySearchButton",function(){
+    var input=this.innerHTML
+    forecasts(input)
+})
+
+$(".jumbotron").css("background-image","url(./assets/city-scape.jpg)")
 
     //function to update time
 
@@ -29,9 +52,13 @@ $(document).ready(function () {
 
     //function to show lat and long
 
-    function forecasts() {
-        var city = $(this).attr("data-city");
-        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + APIkey;
+    function forecasts(city) {
+       // var city = $(this).attr("data-city");
+
+
+  var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + APIkey;
+        
+        //var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city[0] + "&units=imperial&appid=" + APIkey;
 
         
 
@@ -42,10 +69,20 @@ $(document).ready(function () {
         method: "GET"
     }).then(function (response) {
         //print city name at the top 
-        var city = response.city.name;
-        $("#cityName").text(city);
+        var ajaxCity = response.city.name;
+        $("#cityName").text(ajaxCity);
         var windspeed = response.list[0].wind.speed;
-        $(".w").text(windspeed);
+        var lat = response.city.coord.lat
+        var long= response.city.coord.lon
+        $.ajax({
+            url: 'https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+long+'&exclude=hourly&appid='+APIkey,
+            method: "GET"
+        }).then(function (response){
+            console.log(response)
+            //put code here to write a for loop with new HTML for each daily item
+
+        })
+        $(".w").text(windspeed);//change .w to a specific dom element
         //print temperature, humidity, and the icon using .find method. 
         //.find the class in <span> to create a new object collection, 
         //then loop through the object and response to print temperature, humidity, and icon \
@@ -60,9 +97,9 @@ $(document).ready(function () {
         //make another ajax call for UV index 
         lat = response.city.coord.lat;
         lon = response.city.coord.lon;
-        printUV();
+       // printUV();
 
-    });
+    })//put your .then here;
 };
 
 function printUV() {
@@ -83,11 +120,11 @@ function clear() {
     $("#cities").empty();
     cities = ["New York", "San Francisco", "Portland", "Boston", "Atlanta"];
     
-    addCity();
+   // addCity();
 }
 
-
-addCity();
+//
+//addCity();
 $(document).on("click", ".city", forecasts);
 $("#clearBtn").on("click", clear);
 });
