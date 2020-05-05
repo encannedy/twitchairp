@@ -26,7 +26,7 @@ for (i=0;i<city.length;i++){
 $("#searchBtn").on("click",function(){
     var input=$("#searchBar").val();
     city.push(input);
-    $("#buttonDiv").append("<button class='citySearchButton' value='"+input+"'>"+input+"</button>");
+    $("#buttonDiv").prepend("<button class='citySearchButton' value='"+input+"'>"+input+"</button>");
     forecasts(input);
     localStorage.setItem("cities",JSON.stringify(city));
     if(input === ""){
@@ -67,6 +67,8 @@ $(document).on("click",".citySearchButton",function(){
         
 
       $("#weatherDetails").empty().append(tempEl, humidityEl, windEl);
+
+    
       
 
 
@@ -90,8 +92,11 @@ $(document).on("click",".citySearchButton",function(){
         })
       
         //for loop for cards at botton; temp, humidity, date etc.
-        console.log("fivedays", response); 
+         
         $("#forecast").empty();
+        var forecastWeatherData2= "http://openweathermap.org/img/wn/" + response.list[0].weather[0].icon + ".png";
+        var forecastWeatherIcon2 = $("<img>").attr("src", forecastWeatherData2);
+        $("#weatherDetails").append(forecastWeatherIcon2);
         for (var i = 1; i < 6; i++) {
             var forecastDate= moment().add (i, 'days').format("L");
             var forcastCol= $("<div class='col'>");
@@ -101,7 +106,6 @@ $(document).on("click",".citySearchButton",function(){
             var forecastWeatherData= "http://openweathermap.org/img/wn/" + response.list[i].weather[0].icon + ".png";
             var forcastTempData= response.list[i].main.temp;
             var forcastHumidityData= response.list[i].main.humidity;
-
             var forcastDateP =$("<p>").text(forecastDate);
             var forecastWeatherIcon = $("<img>").attr("src", forecastWeatherData);
             var forcastTempEl = $("<p>").text("Tempature: " + forcastTempData + String.fromCharCode(176) +"F");
@@ -109,8 +113,9 @@ $(document).on("click",".citySearchButton",function(){
 
            forcastCol.append(forcastDateP, forecastWeatherIcon, forcastTempEl, forcastHumidityEl);
            $("#forecast").append(forcastCol);
-            
 
+          
+           
         }
 
 
@@ -133,3 +138,5 @@ $("#clearBtn").on("click", clear);
 });
 
 //make sure to add a clear button and everything is appending to itself
+
+//make it where last searched item remains on page at next page load
