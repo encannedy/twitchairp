@@ -15,98 +15,47 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="jumbotron">
-            <h1 class="display-3">Weather Dashboard</h1>
-            <p id="clock"></p>
-        </div>
-    </div>
-    <div class="container"></div>
+    <header class="p-2 jumbotron">
+        <h1>Weather Dashboard</h1>
+    </header>
+
+<div class="container">
     <div class="row">
-        <div class="col-md-3 ">
+        <div class="col-md-4 ">
             <div class="card">
-                <div id= "citySearch" class="card-header">
-                    <input class="mb-2 my-1" id="searchBar" type="text">
-                    <button id="searchBtn" class="btn btn-primary mb-2 my-1">
-                        <i class="fas fa-search"> Search</i>
-                    </button>
-
-
+                <div id ="citySearch" class="card-header container row">
+                    Search for your City:
                 </div>
-            </div>
-        </div>
-        <div class="card col-md-8">
-            <div class="card-header">
-                Featured
-            </div>
-            <div class="card-body ">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-    </div>
-    <!-- <div class=row> -->
-        <div class="col-md-9">
-            <div class="card">
-                <div id="cityName" class="card-header">
-                    <div class="card-deck">
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to
-                                    additional content.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to
-                                    additional content.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to
-                                    additional content.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to
-                                    additional content.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to
-                                    additional content.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                </p>
-                            </div>
-                        </div>
+               
+                <input class="mb-2 my-1" id="searchBar" type="text"></input>
+                <button id="searchBtn" class="btn btn-primary mb-2 my-1">
+                    <i class="fas fa-search"> Search</i>
+                    </button>
+                <div class="row">
+                    <div id="buttonDiv" class="col">
+
                     </div>
                 </div>
             </div>
-        <!-- </div> -->
-    </div>
-    </div>
-    </div>
+        </div>
+            
+         
+        
+        <div class="card col-md-8">
+            <div class="card-header" id="currentDay">
+                <h1 id="cityName "></h1>
+            </div>
+            <div class="card-body" id="weatherDetails">
+                
+            </div>
+        </div>
     </div>
 
+    <div class="row" id="forecast">
+        
     </div>
+</div>
+            
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
