@@ -1,6 +1,10 @@
 # twitchairp
 WeatherApp Dashboard
 
+The page will load with pre-assigned City Names.  
+When a user clicks on a city name the current forcast along with Temperature, windspeed, UV index and Humidity will show.
+Below that the 5 day forcast will show with the temperature and Humidity.
+
 User Story
 Build a weather dashoard 
 Acceptance Criteria
